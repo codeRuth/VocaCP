@@ -1,18 +1,22 @@
-
 from pptx import Presentation
 
-textBlob = list()
-prs = Presentation("pitch.pptx")
-prs.save('temp.pptx')
+mainObj = dict()
+slideObj = dict()
+subText = list()
+prs = Presentation("hello.pptx")
 
-slide = prs.slides[2]
+for index, slide in enumerate(prs.slides):
+    for indexSlide, shape in enumerate(slide.shapes):
+        try:
+            if indexSlide == 0:
+                slideObj['title'] = shape.text
+            else:
+                subText.append(shape.text)
+        except AttributeError:
+            pass
 
-for shape in slide.shapes:
-    try:
-        textBlob.append(shape.text)
-    except AttributeError:
-        print "not a valid attribute"
+    slideObj['body'] = subText[0]
+    mainObj[index] = slideObj
+    del subText[:]
 
-textBlob = filter(None, textBlob)  # fastest
-
-print textBlob
+print mainObj
