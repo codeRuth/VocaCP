@@ -3,7 +3,8 @@ from pptx import Presentation
 mainObj = dict()
 slideObj = dict()
 subText = list()
-prs = Presentation("hello.pptx")
+prs = Presentation("microprocessor.pptx")
+
 
 for index, slide in enumerate(prs.slides):
     for indexSlide, shape in enumerate(slide.shapes):
